@@ -17,7 +17,7 @@ export function ScheduleGrid({
   return (
     <div
       className={
-        'grid grid-cols-[5.5rem_repeat(7,minmax(0,1fr))] gap-px bg-zinc-200 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-800 ' +
+        'grid grid-cols-[5.5rem_repeat(7,minmax(0,1fr))] grid-rows-[auto_repeat(4,minmax(0,1fr))] gap-px bg-zinc-200 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-800 h-full ' +
         (className ?? '')
       }
     >
@@ -31,7 +31,7 @@ export function ScheduleGrid({
         const divider = i === MORNING_COUNT ? ' border-t-2 border-zinc-400 dark:border-zinc-600' : '';
         return (
           <Fragment key={period.id}>
-            <div className={'bg-white p-2 dark:bg-zinc-900' + divider}>
+            <div className={'bg-white p-2 overflow-hidden dark:bg-zinc-900' + divider}>
               {i === 0 && (
                 <span className="inline-block rounded bg-zinc-100 px-1.5 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">上午</span>
               )}
@@ -42,7 +42,7 @@ export function ScheduleGrid({
               <p className="text-xs text-zinc-500 dark:text-zinc-400">{period.time}</p>
             </div>
             {DAYS.map((d) => (
-              <div key={d.id} className={'bg-white p-2 min-h-[4.5rem] dark:bg-zinc-900' + divider}>
+              <div key={d.id} className={'bg-white p-2 overflow-hidden dark:bg-zinc-900' + divider}>
                 <ScheduleCell course={byCell.get(d.id + ':' + period.id)} currentWeek={currentWeek} />
               </div>
             ))}
