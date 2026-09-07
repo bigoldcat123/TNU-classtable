@@ -3,7 +3,15 @@ import { DAYS, MORNING_COUNT } from '../constants';
 import type { ScheduleData } from '../types';
 import { ScheduleCell } from './schedule-cell';
 
-export function ScheduleGrid({ schedule, className }: { schedule: ScheduleData; className?: string }) {
+export function ScheduleGrid({
+  schedule,
+  currentWeek,
+  className,
+}: {
+  schedule: ScheduleData;
+  currentWeek?: number;
+  className?: string;
+}) {
   const byCell = new Map(schedule.courses.map((c) => [c.day + ':' + c.period, c]));
 
   return (
@@ -35,7 +43,7 @@ export function ScheduleGrid({ schedule, className }: { schedule: ScheduleData; 
             </div>
             {DAYS.map((d) => (
               <div key={d.id} className={'bg-white p-2 min-h-[4.5rem] dark:bg-zinc-900' + divider}>
-                <ScheduleCell course={byCell.get(d.id + ':' + period.id)} />
+                <ScheduleCell course={byCell.get(d.id + ':' + period.id)} currentWeek={currentWeek} />
               </div>
             ))}
           </Fragment>

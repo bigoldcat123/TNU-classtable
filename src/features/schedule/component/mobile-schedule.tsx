@@ -7,7 +7,15 @@ import { ScheduleCell } from './schedule-cell';
 
 const ID_BY_WEEKDAY = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
-export function MobileSchedule({ schedule, className }: { schedule: ScheduleData; className?: string }) {
+export function MobileSchedule({
+  schedule,
+  currentWeek,
+  className,
+}: {
+  schedule: ScheduleData;
+  currentWeek?: number;
+  className?: string;
+}) {
   const [selectedDay, setSelectedDay] = useState<DayId>((ID_BY_WEEKDAY[new Date().getDay()] ?? 'mon') as DayId);
   const byCell = new Map(schedule.courses.map((c) => [c.day + ':' + c.period, c]));
   const morning = schedule.periods.slice(0, MORNING_COUNT);
@@ -40,7 +48,7 @@ export function MobileSchedule({ schedule, className }: { schedule: ScheduleData
             <p className="font-medium">{p.label}</p>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">{p.time}</p>
             <div className="mt-1">
-              <ScheduleCell course={byCell.get(selectedDay + ':' + p.id)} />
+              <ScheduleCell course={byCell.get(selectedDay + ':' + p.id)} currentWeek={currentWeek} />
             </div>
           </div>
         ))}
@@ -50,7 +58,7 @@ export function MobileSchedule({ schedule, className }: { schedule: ScheduleData
             <p className="font-medium">{p.label}</p>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">{p.time}</p>
             <div className="mt-1">
-              <ScheduleCell course={byCell.get(selectedDay + ':' + p.id)} />
+              <ScheduleCell course={byCell.get(selectedDay + ':' + p.id)} currentWeek={currentWeek} />
             </div>
           </div>
         ))}

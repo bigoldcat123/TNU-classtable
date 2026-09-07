@@ -1,11 +1,13 @@
+import { isCourseInWeek } from '../week';
 import type { Course } from '../types';
 
-export function ScheduleCell({ course }: { course?: Course }) {
+export function ScheduleCell({ course, currentWeek }: { course?: Course; currentWeek?: number }) {
   if (!course) {
     return <span className="text-zinc-400 dark:text-zinc-600">—</span>;
   }
+  const dimmed = currentWeek !== undefined && !isCourseInWeek(course.remark, currentWeek);
   return (
-    <div>
+    <div className={dimmed ? 'opacity-40' : undefined}>
       <p className="font-medium">{course.name}</p>
       {course.teacher && <p className="text-sm text-zinc-500 dark:text-zinc-400">{course.teacher}</p>}
       {course.room && <p className="text-sm text-zinc-500 dark:text-zinc-400">{course.room}</p>}
