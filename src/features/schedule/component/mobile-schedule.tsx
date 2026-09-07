@@ -24,7 +24,9 @@ export function MobileSchedule({ schedule, className }: { schedule: ScheduleData
             aria-pressed={selectedDay === d.id}
             className={
               'rounded px-3 py-1.5 text-sm whitespace-nowrap ' +
-              (selectedDay === d.id ? 'bg-zinc-900 text-white' : 'bg-zinc-100')
+              (selectedDay === d.id
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                : 'bg-zinc-100 dark:bg-zinc-800')
             }
           >
             {d.label}
@@ -32,21 +34,21 @@ export function MobileSchedule({ schedule, className }: { schedule: ScheduleData
         ))}
       </div>
       <div className="mt-4 space-y-3">
-        <h3 className="text-sm font-semibold text-zinc-500">上午</h3>
+        <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">上午</h3>
         {morning.map((p) => (
-          <div key={p.id} className="rounded-lg border p-3">
+          <div key={p.id} className="rounded-lg border border-zinc-200 p-3 dark:border-zinc-700">
             <p className="font-medium">{p.label}</p>
-            <p className="text-xs text-zinc-500">{p.time}</p>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">{p.time}</p>
             <div className="mt-1">
               <ScheduleCell course={byCell.get(selectedDay + ':' + p.id)} />
             </div>
           </div>
         ))}
-        <h3 className="text-sm font-semibold text-zinc-500">下午</h3>
+        <h3 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">下午</h3>
         {afternoon.map((p) => (
-          <div key={p.id} className="rounded-lg border p-3">
+          <div key={p.id} className="rounded-lg border border-zinc-200 p-3 dark:border-zinc-700">
             <p className="font-medium">{p.label}</p>
-            <p className="text-xs text-zinc-500">{p.time}</p>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">{p.time}</p>
             <div className="mt-1">
               <ScheduleCell course={byCell.get(selectedDay + ':' + p.id)} />
             </div>

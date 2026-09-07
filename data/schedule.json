@@ -1,4 +1,5 @@
 {
+  "weekStart": "2026-08-31",
   "periods": [
     { "id": "p1", "label": "第一节", "time": "08:00 - 09:35" },
     { "id": "p2", "label": "第二节", "time": "09:50 - 11:25" },
@@ -6,16 +7,14 @@
     { "id": "p4", "label": "第四节", "time": "15:50 - 17:25" }
   ],
   "courses": [
-    { "day": "mon", "period": "p1", "name": "语文", "teacher": "张老师", "room": "A101" },
-    { "day": "mon", "period": "p2", "name": "数学", "teacher": "李老师", "room": "A102" },
-    { "day": "mon", "period": "p3", "name": "英语", "teacher": "王老师", "room": "B203" },
-    { "day": "mon", "period": "p4", "name": "物理", "teacher": "赵老师", "room": "B305" },
-    { "day": "tue", "period": "p1", "name": "化学", "teacher": "钱老师", "room": "B401" },
-    { "day": "tue", "period": "p3", "name": "体育", "teacher": "孙老师", "room": "操场" },
-    { "day": "wed", "period": "p2", "name": "历史", "teacher": "周老师", "room": "A201" },
-    { "day": "thu", "period": "p1", "name": "生物", "teacher": "吴老师", "room": "B101" },
-    { "day": "fri", "period": "p4", "name": "班会", "room": "A101" },
-    { "day": "sat", "period": "p2", "name": "兴趣小组", "room": "多功能厅" },
-    { "day": "sun", "period": "p1", "name": "自习" }
+    { "day": "mon", "period": "p1", "name": "算法设计与分析", "teacher": "王淑琴", "room": "劝B416", "remark": "第2-9周 · 上午1-2节" },
+    { "day": "mon", "period": "p2", "name": "算法设计与分析", "teacher": "王淑琴", "room": "劝B416", "remark": "第2-9周 · 上午1-2节" },
+    { "day": "tue", "period": "p1", "name": "中国式现代化理论与实践", "teacher": "王斌", "room": "9班, 劝C507", "remark": "第2-10周 · 上午1-2节" },
+    { "day": "tue", "period": "p2", "name": "中国式现代化理论与实践", "teacher": "王斌", "room": "9班, 劝C507", "remark": "第2-10周 · 上午1-2节" },
+    { "day": "tue", "period": "p3", "name": "高级计算机系统结构", "teacher": "胡燕翔", "room": "劝C206", "remark": "下午第1节 · 周次未标注" },
+    { "day": "wed", "period": "p2", "name": "数据挖掘", "teacher": "马春梅", "room": "劝B416", "remark": "上午第2节 · 周次未标注" },
+    { "day": "wed", "period": "p3", "name": "程序设计方法学", "teacher": "宿通道", "room": "劝B416", "remark": "第3-17周 · 下午第1节" },
+    { "day": "wed", "period": "p4", "name": "机器学习", "teacher": "朱远平", "room": "劝B416", "remark": "第3-17周 · 下午第2节" },
+    { "day": "fri", "period": "p2", "name": "软件体系结构", "teacher": "马江涛", "room": "劝B416", "remark": "上午第2节" }
   ]
 }

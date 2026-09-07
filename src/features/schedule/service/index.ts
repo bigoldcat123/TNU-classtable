@@ -8,7 +8,12 @@ export function parseSchedule(raw: unknown): ScheduleData {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
     throw new ScheduleError('schedule.json 顶层必须是对象');
   }
-  const data = raw as { periods?: unknown; courses?: unknown };
+  const data = raw as { weekStart?: unknown; periods?: unknown; courses?: unknown };
+
+  const { weekStart } = data;
+  if (typeof weekStart !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(weekStart)) {
+    throw new ScheduleError('weekStart 必须是 YYYY-MM-DD 格式的日期');
+  }
 
   if (!Array.isArray(data.periods) || data.periods.length !== 4) {
     throw new ScheduleError('periods 必须是恰好 4 节课（上午 2 节下午 2 节）');
@@ -39,7 +44,7 @@ export function parseSchedule(raw: unknown): ScheduleData {
     if (typeof item !== 'object' || item === null || Array.isArray(item)) {
       throw new ScheduleError(`courses[${i}] 缺少 day/period/name`);
     }
-    const c = item as { day?: unknown; period?: unknown; name?: unknown; teacher?: unknown; room?: unknown };
+    const c = item as { day?: unknown; period?: unknown; name?: unknown; teacher?: unknown; room?: unknown; remark?: unknown };
     if (typeof c.day !== 'string' || !(DAY_IDS as readonly string[]).includes(c.day)) {
       throw new ScheduleError(`courses[${i}] 的 day 无效: ${c.day}`);
     }
@@ -65,10 +70,16 @@ export function parseSchedule(raw: unknown): ScheduleData {
       }
       course.room = c.room;
     }
+    if (c.remark !== undefined) {
+      if (typeof c.remark !== 'string') {
+        throw new ScheduleError(`courses[${i}] 的 remark 必须是字符串`);
+      }
+      course.remark = c.remark;
+    }
     return course;
   });
 
-  return { days: DAYS, periods, courses };
+  return { weekStart, days: DAYS, periods, courses };
 }
 
 export async function loadSchedule(): Promise<ScheduleData> {
