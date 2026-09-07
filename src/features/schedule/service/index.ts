@@ -1,5 +1,6 @@
 import { DAYS, DAY_IDS } from '../constants';
 import { ScheduleError } from '../error';
+import { parseWeeks } from '../week';
 import type { Course, DayId, Period, ScheduleData } from '../types';
 
 export function parseSchedule(raw: unknown): ScheduleData {
@@ -42,7 +43,7 @@ export function parseSchedule(raw: unknown): ScheduleData {
     if (typeof item !== 'object' || item === null || Array.isArray(item)) {
       throw new ScheduleError(`courses[${i}] 缺少 day/period/name`);
     }
-    const c = item as { day?: unknown; period?: unknown; name?: unknown; teacher?: unknown; room?: unknown; remark?: unknown };
+    const c = item as { day?: unknown; period?: unknown; name?: unknown; teacher?: unknown; room?: unknown; weeks?: unknown; remark?: unknown };
     if (typeof c.day !== 'string' || !(DAY_IDS as readonly string[]).includes(c.day)) {
       throw new ScheduleError(`courses[${i}] 的 day 无效: ${c.day}`);
     }
@@ -67,6 +68,12 @@ export function parseSchedule(raw: unknown): ScheduleData {
         throw new ScheduleError(`courses[${i}] 的 room 必须是字符串`);
       }
       course.room = c.room;
+    }
+    if (c.weeks !== undefined) {
+      if (typeof c.weeks !== 'string' || parseWeeks(c.weeks) === null) {
+        throw new ScheduleError(`courses[${i}] 的 weeks 无效: ${c.weeks}`);
+      }
+      course.weeks = c.weeks;
     }
     if (c.remark !== undefined) {
       if (typeof c.remark !== 'string') {

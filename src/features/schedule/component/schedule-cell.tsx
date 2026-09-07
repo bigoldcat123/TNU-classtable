@@ -5,7 +5,7 @@ export function ScheduleCell({ course, currentWeek }: { course?: Course; current
   if (!course) {
     return <span className="text-zinc-400 dark:text-zinc-600">—</span>;
   }
-  const dimmed = currentWeek !== undefined && !isCourseInWeek(course.remark, currentWeek);
+  const dimmed = currentWeek !== undefined && !isCourseInWeek(course.weeks, currentWeek);
   return (
     <div className={dimmed ? 'opacity-40' : undefined}>
       <p className="font-medium">{course.name}</p>
