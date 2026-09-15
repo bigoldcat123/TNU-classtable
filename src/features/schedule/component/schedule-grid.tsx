@@ -1,15 +1,17 @@
 import { Fragment } from 'react';
 import { DAYS, MORNING_COUNT } from '../constants';
-import type { ScheduleData } from '../types';
+import type { DayId, ScheduleData } from '../types';
 import { ScheduleCell } from './schedule-cell';
 
 export function ScheduleGrid({
   schedule,
   currentWeek,
+  today,
   className,
 }: {
   schedule: ScheduleData;
   currentWeek?: number;
+  today?: DayId;
   className?: string;
 }) {
   const byCell = new Map(schedule.courses.map((c) => [c.day + ':' + c.period, c]));
@@ -23,7 +25,14 @@ export function ScheduleGrid({
     >
       <div className="sticky top-0 bg-white dark:bg-zinc-900" />
       {DAYS.map((d) => (
-        <div key={d.id} className="sticky top-0 bg-white font-medium dark:bg-zinc-900">
+        <div
+          key={d.id}
+          className={
+            d.id === today
+              ? 'sticky top-0 bg-amber-100 font-medium text-amber-900 dark:bg-amber-900/40 dark:text-amber-100'
+              : 'sticky top-0 bg-white font-medium dark:bg-zinc-900'
+          }
+        >
           {d.label}
         </div>
       ))}
@@ -42,7 +51,14 @@ export function ScheduleGrid({
               <p className="text-xs text-zinc-500 dark:text-zinc-400">{period.time}</p>
             </div>
             {DAYS.map((d) => (
-              <div key={d.id} className={'bg-white p-2 overflow-hidden dark:bg-zinc-900' + divider}>
+              <div
+                key={d.id}
+                className={
+                  (d.id === today ? 'bg-amber-50 dark:bg-amber-950/30' : 'bg-white dark:bg-zinc-900') +
+                  ' p-2 overflow-hidden' +
+                  divider
+                }
+              >
                 <ScheduleCell course={byCell.get(d.id + ':' + period.id)} currentWeek={currentWeek} />
               </div>
             ))}
